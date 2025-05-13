@@ -58,34 +58,18 @@ jobs:
         run: chmod +x gradlew
 
       - name: Decode Keystore
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.release }}
         env:
           ENCODED_KEYSTORE: ${{ secrets.KEYSTORE_BASE64 }}
         run: |
           mkdir -p "${RUNNER_TEMP}"
           echo -n "${ENCODED_KEYSTORE}" | base64 --decode > "${RUNNER_TEMP}/panda.jks"
 
-      - name: Create release keystore
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.release }}
+      - name: Create keystore properties
         run: |
           echo "STORE_FILE=${RUNNER_TEMP}/panda.jks" > keystore.properties
           echo "STORE_PASSWORD=${{ secrets.KEYSTORE_PASSWORD }}" >> keystore.properties
           echo "KEY_ALIAS=${{ secrets.KEY_ALIAS }}" >> keystore.properties
           echo "KEY_PASSWORD=${{ secrets.KEY_PASSWORD }}" >> keystore.properties
-
-      - name: Create debug keystore
-        if: ${{ github.event_name == 'workflow_dispatch' && !inputs.release }}
-        run: |
-          mkdir -p "${RUNNER_TEMP}"
-          keytool -genkey -v -keystore "${RUNNER_TEMP}/debug.keystore" \
-                  -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 \
-                  -storepass android -keypass android \
-                  -dname "CN=Android Debug,O=Android,C=US"
-
-          echo "STORE_FILE=${RUNNER_TEMP}/debug.keystore" > keystore.properties
-          echo "STORE_PASSWORD=android" >> keystore.properties
-          echo "KEY_ALIAS=androiddebugkey" >> keystore.properties
-          echo "KEY_PASSWORD=android" >> keystore.properties
 
       - name: Build Release APKs
         run: ./gradlew assembleRelease
