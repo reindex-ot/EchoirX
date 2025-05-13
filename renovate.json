@@ -4,6 +4,8 @@
     "config:recommended"
   ],
   "ignoreUnstable": false,
+  "automerge": true,
+  "platformAutomerge": true,
   "packageRules": [
     {
       "matchManagers": [
