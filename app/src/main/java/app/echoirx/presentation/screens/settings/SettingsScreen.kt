@@ -22,12 +22,11 @@ import androidx.compose.material.icons.outlined.Folder
 import androidx.compose.material.icons.outlined.History
 import androidx.compose.material.icons.outlined.Image
 import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.MusicNote
+import androidx.compose.material.icons.outlined.Lyrics
 import androidx.compose.material.icons.outlined.RestartAlt
 import androidx.compose.material.icons.outlined.TextFormat
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -46,6 +45,7 @@ import app.echoirx.BuildConfig
 import app.echoirx.R
 import app.echoirx.data.utils.extensions.toDisplayPath
 import app.echoirx.domain.model.Region
+import app.echoirx.presentation.components.ThumbSwitch
 import app.echoirx.presentation.components.preferences.PreferenceCategory
 import app.echoirx.presentation.components.preferences.PreferenceItem
 import app.echoirx.presentation.components.preferences.PreferencePosition
@@ -103,7 +103,6 @@ fun SettingsScreen(
         SettingsActionBottomSheet(
             title = stringResource(R.string.dialog_reset_settings_title),
             description = stringResource(R.string.dialog_reset_settings_message),
-            icon = Icons.Outlined.RestartAlt,
             confirmText = stringResource(R.string.action_reset),
             cancelText = stringResource(R.string.action_cancel),
             onConfirm = {
@@ -117,7 +116,6 @@ fun SettingsScreen(
         SettingsActionBottomSheet(
             title = stringResource(R.string.dialog_clear_data_title),
             description = stringResource(R.string.dialog_clear_data_message),
-            icon = Icons.Outlined.Delete,
             confirmText = stringResource(R.string.action_clear),
             cancelText = stringResource(R.string.action_cancel),
             onConfirm = {
@@ -131,7 +129,6 @@ fun SettingsScreen(
         SettingsActionBottomSheet(
             title = stringResource(R.string.dialog_clear_history_title),
             description = stringResource(R.string.dialog_clear_history_message),
-            icon = Icons.Outlined.History,
             confirmText = stringResource(R.string.action_clear),
             cancelText = stringResource(R.string.action_cancel),
             onConfirm = {
@@ -168,7 +165,8 @@ fun SettingsScreen(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(3.dp)
     ) {
         item {
             PreferenceCategory(title = stringResource(R.string.title_content))
@@ -254,7 +252,7 @@ fun SettingsScreen(
                 icon = Icons.Outlined.Image,
                 position = PreferencePosition.Middle,
                 trailingContent = {
-                    Switch(
+                    ThumbSwitch(
                         checked = state.saveCoverArt,
                         onCheckedChange = { viewModel.updateSaveCoverArt(it) }
                     )
@@ -266,10 +264,10 @@ fun SettingsScreen(
             PreferenceItem(
                 title = stringResource(R.string.title_save_lyrics),
                 subtitle = stringResource(R.string.subtitle_save_lyrics),
-                icon = Icons.Outlined.MusicNote,
+                icon = Icons.Outlined.Lyrics,
                 position = PreferencePosition.Bottom,
                 trailingContent = {
-                    Switch(
+                    ThumbSwitch(
                         checked = state.saveLyrics,
                         onCheckedChange = { viewModel.updateSaveLyrics(it) }
                     )

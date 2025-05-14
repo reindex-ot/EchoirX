@@ -3,8 +3,10 @@ package app.echoirx.presentation.navigation.components
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -15,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import app.echoirx.R
 import app.echoirx.presentation.navigation.Route
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun EchoirTopBar(
     currentRoute: Route?,
@@ -37,7 +39,10 @@ fun EchoirTopBar(
         },
         navigationIcon = {
             if (currentRoute is Route.Search.Details) {
-                IconButton(onClick = onNavigateBack) {
+                FilledTonalIconButton(
+                    onClick = onNavigateBack,
+                    shapes = IconButtonDefaults.shapes()
+                ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Default.ArrowBack,
                         contentDescription = stringResource(R.string.cd_back_button)

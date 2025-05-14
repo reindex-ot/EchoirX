@@ -22,20 +22,15 @@ import androidx.compose.material.icons.outlined.FilterAlt
 import androidx.compose.material3.ContainedLoadingIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.FilterChip
-import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.InputChip
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.PlainTooltip
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.TooltipBox
-import androidx.compose.material3.TooltipDefaults
-import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -117,67 +112,82 @@ fun SearchScreen(
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            TextField(
-                value = state.query,
-                onValueChange = { viewModel.onQueryChange(it) },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .focusRequester(focusRequester),
-                colors = TextFieldDefaults.colors(
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                    unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHigh
-                ),
-                shape = MaterialTheme.shapes.small,
-                placeholder = {
-                    Text(
-                        text = stringResource(
-                            R.string.hint_search,
-                            stringResource(state.searchType.title)
-                        ),
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                },
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_search),
-                        contentDescription = stringResource(R.string.cd_search),
-                    )
-                },
-                trailingIcon = {
-                    if (state.query.isNotEmpty()) {
-                        IconButton(
-                            onClick = { viewModel.clearSearch() }
-                        ) {
-                            Icon(
-                                painter = painterResource(R.drawable.ic_clear),
-                                contentDescription = stringResource(R.string.cd_clear_search)
-                            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                TextField(
+                    value = state.query,
+                    onValueChange = { viewModel.onQueryChange(it) },
+                    modifier = Modifier
+                        .weight(1f)
+                        .focusRequester(focusRequester),
+                    colors = TextFieldDefaults.colors(
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+                        unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainerHigh
+                    ),
+                    shape = MaterialTheme.shapes.extraLarge,
+                    placeholder = {
+                        Text(
+                            text = stringResource(
+                                R.string.hint_search,
+                                stringResource(state.searchType.title)
+                            ),
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+                    },
+                    leadingIcon = {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_search),
+                            contentDescription = stringResource(R.string.cd_search)
+                        )
+                    },
+                    trailingIcon = {
+                        if (state.query.isNotEmpty()) {
+                            IconButton(
+                                onClick = { viewModel.clearSearch() }
+                            ) {
+                                Icon(
+                                    painter = painterResource(R.drawable.ic_clear),
+                                    contentDescription = stringResource(R.string.cd_clear_search)
+                                )
+                            }
                         }
-                    }
-                },
-                singleLine = true,
-                textStyle = MaterialTheme.typography.bodyLarge,
-                keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Search
-                ),
-                keyboardActions = KeyboardActions(
-                    onSearch = {
-                        if (state.status == SearchStatus.Ready) {
-                            viewModel.search()
-                            focusManager.clearFocus()
+                    },
+                    singleLine = true,
+                    textStyle = MaterialTheme.typography.bodyLarge,
+                    keyboardOptions = KeyboardOptions(
+                        imeAction = ImeAction.Search
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onSearch = {
+                            if (state.status == SearchStatus.Ready) {
+                                viewModel.search()
+                                focusManager.clearFocus()
+                            }
                         }
-                    }
+                    )
                 )
-            )
+
+                IconButton(
+                    onClick = { showFilterBottomSheet = true }
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.FilterAlt,
+                        contentDescription = stringResource(R.string.cd_filter_button)
+                    )
+                }
+            }
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 SearchType.entries.forEach { type ->
-                    FilterChip(
+                    InputChip(
                         selected = state.searchType == type,
                         onClick = {
                             viewModel.onSearchTypeChange(type)
@@ -186,42 +196,15 @@ fun SearchScreen(
                         label = {
                             Text(
                                 text = stringResource(type.title),
-                                style = MaterialTheme.typography.labelLarge
                             )
                         },
-                        border = FilterChipDefaults.filterChipBorder(
-                            enabled = true,
-                            selected = state.searchType == type,
-                            borderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)
-                        )
+                        shape = MaterialTheme.shapes.extraLarge
                     )
                 }
+
                 Spacer(
                     modifier = Modifier.weight(1f)
                 )
-                TooltipBox(
-                    positionProvider = TooltipDefaults.rememberTooltipPositionProvider(),
-                    tooltip = {
-                        PlainTooltip(
-                            containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                            contentColor = MaterialTheme.colorScheme.onSurface
-                        ) {
-                            Text(
-                                text = stringResource(R.string.tooltip_filter)
-                            )
-                        }
-                    },
-                    state = rememberTooltipState()
-                ) {
-                    IconButton(
-                        onClick = { showFilterBottomSheet = true }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.FilterAlt,
-                            contentDescription = stringResource(R.string.cd_filter_button)
-                        )
-                    }
-                }
             }
         }
 

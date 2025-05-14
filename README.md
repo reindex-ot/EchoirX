@@ -1,32 +1,31 @@
 ![Echoir Banner](.github/assets/banner.png)
 
-# Echoir
-
-> A sophisticated Material You music downloader for Android
-
-![Android](https://ziadoua.github.io/m3-Markdown-Badges/badges/Android/android2.svg)
-![Kotlin](https://ziadoua.github.io/m3-Markdown-Badges/badges/Kotlin/kotlin2.svg)
-![stars](https://m3-markdown-badges.vercel.app/stars/10/3/imjyotiraditya/echoirx)
+[![API](https://img.shields.io/badge/26%2B-level?style=for-the-badge&logo=android&logoColor=3cd382&label=API&labelColor=21262d&color=ff663b)](https://developer.android.com/studio/releases/platforms) [![Language](https://img.shields.io/badge/Kotlin-language?style=for-the-badge&logo=kotlin&logoColor=7F52FF&label=language&labelColor=21262d&color=7F52FF)](https://kotlinlang.org/) [![Stars](https://img.shields.io/github/stars/imjyotiraditya/echoirx?style=for-the-badge&logo=github&labelColor=21262d&color=238636)](https://github.com/imjyotiraditya/echoirx/stargazers) [![Release](https://img.shields.io/github/v/release/imjyotiraditya/echoirx?display_name=tag&style=for-the-badge&logo=github&labelColor=21262d&color=1f6feb)](https://github.com/imjyotiraditya/echoirx/releases/latest) [![Downloads](https://img.shields.io/github/downloads/imjyotiraditya/echoirx/total?style=for-the-badge&labelColor=21262d&color=238636)](https://github.com/imjyotiraditya/echoirx/releases)
 
 ## Overview
 
-Echoir (from Echo + Choir) is a premium music downloader delivering high-quality audio formats while adhering to Material Design principles. The name cleverly plays on the phrase "which will fall soon," reflecting the ephemeral nature of software projects.
+Echoir (from Echo + Choir) is a sophisticated Material You music downloader for Android, delivering high-quality audio formats while adhering to Material Design principles. The name cleverly plays on the phrase "which will fall soon," reflecting the ephemeral nature of software projects.
 
 ## Key Features
 
 ### Audio Quality Options
-- **Hi-Res Lossless** — Up to 24-bit/192kHz FLAC
-- **CD Quality Lossless** — 16-bit/44.1kHz FLAC
-- **Dolby Atmos** — Enhanced AC-3/AC-4
-- **High Quality AAC** — 320kbps
-- **Standard Quality** — 96kbps AAC
+
+| Quality Option | Technical Details |
+|----------------|-------------------|
+| **Hi-Res Lossless** | Up to 24-bit/192kHz FLAC |
+| **CD Quality Lossless** | 16-bit/44.1kHz FLAC |
+| **Dolby Atmos** | Enhanced AC-3/AC-4 |
+| **High Quality AAC** | 320kbps |
+| **Standard Quality** | 96kbps AAC |
 
 ### Design & User Experience
+
 - **Material You Theming** — Dynamic colors following system preferences
 - **Material Design 3** — Modern components and animations
 - **Intuitive Interface** — Simple workflow for downloading music
 
 ### Core Functionality
+
 - **Background Processing** — Downloads continue with progress notifications
 - **Comprehensive Metadata** — Extensive tag support for all major fields
 - **Queue Management** — Organize and prioritize downloads
@@ -36,6 +35,7 @@ Echoir (from Echo + Choir) is a premium music downloader delivering high-quality
   - Smart filtering system
 
 ### Smart Filtering
+
 - **Quality Filters:** Hi-Res, Lossless, Dolby Atmos
 - **Content Filters:** Explicit, Clean
 
@@ -75,8 +75,10 @@ Echoir utilizes a custom-built version of ffmpeg-kit specifically for Hi-Res Los
 
 ### Recommended Music Players
 
-- **Material Design Lovers:** [Gramophone](https://github.com/AkaneTan/Gramophone) — Modern offline player with MD3
-- **Apple Music Style:** [AccordLegacy](https://github.com/FoedusProgramme/AccordLegacy) — Available via [Light Summer](https://t.me/light_summer)
+| App | Description | Links |
+|-----|-------------|-------|
+| **Gramophone** | Modern offline player with MD3 | [GitHub](https://github.com/AkaneTan/Gramophone) |
+| **AccordLegacy** | Apple Music style player | [Telegram](https://t.me/light_summer) |
 
 ## Credits
 

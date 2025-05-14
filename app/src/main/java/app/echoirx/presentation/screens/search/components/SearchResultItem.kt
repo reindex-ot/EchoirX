@@ -29,8 +29,8 @@ fun SearchResultItem(
     val formatsDisplay = result.formats?.let { formats ->
         formats.mapTo(mutableSetOf()) {
             when (it) {
-                "HIRES_LOSSLESS" -> stringResource(R.string.quality_label_hires_short)
-                "LOSSLESS" -> stringResource(R.string.quality_label_lossless_short)
+                "HIRES_LOSSLESS" -> stringResource(R.string.quality_label_hires)
+                "LOSSLESS" -> stringResource(R.string.quality_label_cdq)
                 "DOLBY_ATMOS" -> stringResource(R.string.label_dolby)
                 "HIGH", "LOW" -> stringResource(R.string.label_aac)
                 else -> stringResource(R.string.label_unknown)
@@ -70,7 +70,7 @@ fun SearchResultItem(
         leadingContent = {
             TrackCover(
                 url = result.cover,
-                size = 56.dp
+                size = 60.dp
             )
         },
         trailingContent = {

@@ -4,9 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
@@ -34,23 +32,22 @@ fun PreferenceItem(
 ) {
     val shape = when (position) {
         PreferencePosition.Single -> MaterialTheme.shapes.large
-        PreferencePosition.Top -> RoundedCornerShape(
-            topStart = 18.dp, topEnd = 18.dp,
-            bottomStart = 4.dp, bottomEnd = 4.dp
+        PreferencePosition.Top -> MaterialTheme.shapes.large.copy(
+            bottomStart = MaterialTheme.shapes.small.bottomStart,
+            bottomEnd = MaterialTheme.shapes.small.bottomEnd
         )
 
-        PreferencePosition.Bottom -> RoundedCornerShape(
-            topStart = 4.dp, topEnd = 4.dp,
-            bottomStart = 18.dp, bottomEnd = 18.dp
+        PreferencePosition.Bottom -> MaterialTheme.shapes.large.copy(
+            topStart = MaterialTheme.shapes.small.topStart,
+            topEnd = MaterialTheme.shapes.small.topEnd
         )
 
-        PreferencePosition.Middle -> RoundedCornerShape(4.dp)
+        PreferencePosition.Middle -> MaterialTheme.shapes.small
     }
 
     ListItem(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 1.dp)
             .clip(shape)
             .then(
                 if (onClick != null) {

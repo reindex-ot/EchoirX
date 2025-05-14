@@ -95,7 +95,6 @@
     <string name="title_content">Content</string>
     <string name="title_download_location">Download location</string>
     <string name="title_server">Server</string>
-    <string name="title_server_settings">Server Settings</string>
     <string name="title_server_recommendation">Server Configuration Required</string>
     <string name="title_clear_data">Clear data</string>
     <string name="title_reset_settings">Reset settings</string>
@@ -171,27 +170,23 @@
     <string name="action_save">Save</string>
     <string name="action_reset_to_default">Reset to Default</string>
     <string name="action_open_settings">Go to Settings</string>
-    <string name="action_open_in_player">Open</string>
+    <string name="action_open_in_player">Open in player</string>
     <string name="action_delete_file">Delete file</string>
     <string name="action_delete_from_history">Remove from history</string>
     <string name="action_share">Share</string>
     <string name="action_play_preview">Play Preview</string>
     <string name="action_stop_preview">Stop Preview</string>
     <string name="action_retry_download">Retry Download</string>
+    <string name="action_download_with_quality">Download (%1$s)</string>
 
     <!-- Quality Labels -->
-    <string name="quality_label_hires">Hi-Res Lossless</string>
-    <string name="quality_label_hires_short">Hi-Res</string>
+    <string name="quality_label_hires">Hi-Res</string>
     <string name="quality_label_lossless">Lossless</string>
-    <string name="quality_label_lossless_short">CDQ</string>
-    <string name="quality_label_dolby_ac3">Dolby Atmos (AC3)</string>
-    <string name="quality_label_dolby_ac3_short">Dolby EAC3</string>
-    <string name="quality_label_dolby_ac4">Dolby Atmos (AC4)</string>
-    <string name="quality_label_dolby_ac4_short">Dolby AC4</string>
-    <string name="quality_label_aac_320">AAC (320k)</string>
-    <string name="quality_label_aac_320_short">AAC 320</string>
-    <string name="quality_label_aac_96">AAC (96k)</string>
-    <string name="quality_label_aac_96_short">AAC 96</string>
+    <string name="quality_label_cdq">CDQ</string>
+    <string name="quality_label_dolby_ac3">Dolby EAC3</string>
+    <string name="quality_label_dolby_ac4">Dolby AC4</string>
+    <string name="quality_label_aac_320">AAC 320</string>
+    <string name="quality_label_aac_96">AAC 96</string>
 
     <!-- Quality Descriptions -->
     <string name="quality_desc_hires">24-bit/192kHz FLAC format with maximum audio quality</string>

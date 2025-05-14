@@ -2,23 +2,26 @@ package app.echoirx.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
-import androidx.compose.material.icons.outlined.History
 import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.material.icons.outlined.Share
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilterChip
-import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.FilledIconButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
@@ -27,6 +30,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -39,7 +44,7 @@ import app.echoirx.domain.model.DownloadStatus
 import app.echoirx.presentation.components.models.ChipAction
 import java.io.File
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun DownloadBottomSheet(
     download: Download,
@@ -83,36 +88,31 @@ fun DownloadBottomSheet(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
-        shape = MaterialTheme.shapes.small,
-        dragHandle = null,
-        containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
         modifier = modifier
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 24.dp),
+                .padding(horizontal = 16.dp)
+                .padding(bottom = 24.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
+                TrackCover(
+                    url = download.searchResult.cover?.replace("80x80", "160x160"),
+                    size = 72.dp
+                )
+
                 Column(
                     modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     Text(
                         text = download.searchResult.title,
-                        style = MaterialTheme.typography.titleMedium,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-
-                    Text(
-                        text = download.searchResult.artists.joinToString(", "),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        style = MaterialTheme.typography.titleLarge,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -125,46 +125,49 @@ fun DownloadBottomSheet(
                             Icon(
                                 painter = painterResource(R.drawable.ic_explicit),
                                 contentDescription = stringResource(R.string.cd_explicit_content),
-                                modifier = Modifier.size(16.dp),
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                modifier = Modifier.size(16.dp)
                             )
                         }
 
-                        val statusText = when (download.status) {
-                            DownloadStatus.COMPLETED -> if (fileExists) {
-                                stringResource(R.string.label_completed)
-                            } else {
-                                stringResource(R.string.label_file_missing)
-                            }
-
-                            DownloadStatus.FAILED -> stringResource(R.string.label_failed)
-                            DownloadStatus.DELETED -> stringResource(R.string.label_deleted)
-                            else -> download.status.name
-                        }
-
                         Text(
-                            text = statusText,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = when {
-                                download.status == DownloadStatus.COMPLETED && fileExists ->
-                                    MaterialTheme.colorScheme.primary
-
-                                download.status == DownloadStatus.FAILED ||
-                                        download.status == DownloadStatus.DELETED ||
-                                        (download.status == DownloadStatus.COMPLETED && !fileExists) ->
-                                    MaterialTheme.colorScheme.error
-
-                                else -> MaterialTheme.colorScheme.onSurfaceVariant
-                            }
+                            text = download.searchResult.artists.joinToString(", "),
+                            style = MaterialTheme.typography.bodyMedium,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
                         )
                     }
-                }
 
-                TrackCover(
-                    url = download.searchResult.cover?.replace("80x80", "160x160"),
-                    size = 80.dp
-                )
+                    val statusText = when (download.status) {
+                        DownloadStatus.COMPLETED -> if (fileExists) {
+                            stringResource(R.string.label_completed)
+                        } else {
+                            stringResource(R.string.label_file_missing)
+                        }
+
+                        DownloadStatus.FAILED -> stringResource(R.string.label_failed)
+                        DownloadStatus.DELETED -> stringResource(R.string.label_deleted)
+                        else -> download.status.name
+                    }
+
+                    Text(
+                        text = statusText,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = when {
+                            download.status == DownloadStatus.COMPLETED && fileExists ->
+                                MaterialTheme.colorScheme.primary
+
+                            download.status == DownloadStatus.FAILED ||
+                                    download.status == DownloadStatus.DELETED ||
+                                    (download.status == DownloadStatus.COMPLETED && !fileExists) ->
+                                MaterialTheme.colorScheme.error
+
+                            else -> MaterialTheme.colorScheme.onSurfaceVariant
+                        }
+                    )
+                }
             }
+
+            HorizontalDivider()
 
             FlowRow(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -215,42 +218,78 @@ fun DownloadBottomSheet(
                     add(
                         ChipAction(
                             label = stringResource(R.string.action_delete_from_history),
-                            icon = Icons.Outlined.History,
+                            icon = painterResource(R.drawable.ic_delete_history),
                             contentDescription = stringResource(R.string.cd_history),
                             onClick = onDeleteFromHistory
                         )
                     )
                 }
 
-                actions.forEach { action ->
-                    FilterChip(
-                        selected = false,
-                        onClick = action.onClick,
-                        label = {
-                            Text(
-                                text = action.label,
-                                style = MaterialTheme.typography.labelLarge
-                            )
-                        },
-                        leadingIcon = {
-                            Icon(
-                                imageVector = action.icon,
-                                contentDescription = action.contentDescription,
-                                modifier = Modifier.size(18.dp)
-                            )
-                        },
-                        colors = FilterChipDefaults.filterChipColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                            labelColor = MaterialTheme.colorScheme.onSurface,
-                            iconColor = MaterialTheme.colorScheme.onSurface,
-                        ),
-                        border = FilterChipDefaults.filterChipBorder(
-                            borderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f),
-                            enabled = true,
-                            selected = false
-                        ),
-                        modifier = Modifier.height(32.dp)
-                    )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Row(
+                        horizontalArrangement = Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        actions.forEach { action ->
+                            if (action.icon != Icons.Outlined.PlayArrow || !shouldShowFileOptions) {
+                                FilledIconButton(
+                                    onClick = action.onClick,
+                                    colors = IconButtonDefaults.filledIconButtonColors(
+                                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                                    ),
+                                    shapes = IconButtonDefaults.shapes()
+                                ) {
+                                    when (action.icon) {
+                                        is ImageVector -> {
+                                            Icon(
+                                                imageVector = action.icon,
+                                                contentDescription = action.contentDescription,
+                                                modifier = Modifier.size(ButtonDefaults.MediumIconSize)
+                                            )
+                                        }
+
+                                        is Painter -> {
+                                            Icon(
+                                                painter = action.icon,
+                                                contentDescription = action.contentDescription,
+                                                modifier = Modifier.size(ButtonDefaults.MediumIconSize)
+                                            )
+                                        }
+                                    }
+                                }
+                                Spacer(modifier = Modifier.width(8.dp))
+                            }
+                        }
+                    }
+
+                    if (shouldShowFileOptions) {
+                        val openPlayerAction = actions.find { it.icon == Icons.Outlined.PlayArrow }
+                        if (openPlayerAction != null) {
+                            Button(
+                                onClick = openPlayerAction.onClick,
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = MaterialTheme.colorScheme.primary
+                                ),
+                                shapes = ButtonDefaults.shapes()
+                            ) {
+                                Icon(
+                                    imageVector = openPlayerAction.icon as ImageVector,
+                                    contentDescription = openPlayerAction.contentDescription,
+                                    modifier = Modifier.size(ButtonDefaults.IconSize)
+                                )
+                                Text(
+                                    text = openPlayerAction.label,
+                                    style = MaterialTheme.typography.labelLarge,
+                                    modifier = Modifier.padding(start = 8.dp)
+                                )
+                            }
+                        }
+                    }
                 }
             }
         }

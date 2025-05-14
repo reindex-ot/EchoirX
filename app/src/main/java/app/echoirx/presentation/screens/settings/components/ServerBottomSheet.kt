@@ -1,20 +1,23 @@
 package app.echoirx.presentation.screens.settings.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Clear
-import androidx.compose.material.icons.outlined.CloudQueue
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -34,10 +37,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.echoirx.R
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun ServerBottomSheet(
     currentServer: String,
@@ -60,55 +64,37 @@ fun ServerBottomSheet(
 
     fun validateAndSave() {
         focusManager.clearFocus()
-        if (serverUrl.isNotBlank()) {
+        if (serverUrl.isBlank()) {
+            showError = true
+            errorMessage = context.getString(R.string.error_empty_server_url)
+        } else {
             val cleanedUrl = cleanUrl(serverUrl)
             onSave(cleanedUrl)
             onDismiss()
-        } else {
-            showError = true
-            errorMessage = context.getString(R.string.error_empty_server_url)
         }
     }
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
-        shape = MaterialTheme.shapes.small,
-        dragHandle = null,
-        containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
         modifier = modifier
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 24.dp),
-            verticalArrangement = Arrangement.spacedBy(24.dp)
+                .padding(horizontal = 16.dp)
         ) {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
+                contentAlignment = Alignment.Center
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.CloudQueue,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(24.dp)
-                    )
-
-                    Text(
-                        text = stringResource(R.string.title_server_settings),
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                }
-
                 Text(
-                    text = stringResource(R.string.msg_server_subtitle),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    text = stringResource(R.string.title_server),
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    textAlign = TextAlign.Center
                 )
             }
 
@@ -131,7 +117,6 @@ fun ServerBottomSheet(
                     } else if (serverUrl.contains(" ")) {
                         Text(
                             text = stringResource(R.string.msg_spaces_will_be_removed),
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 },
@@ -149,7 +134,9 @@ fun ServerBottomSheet(
                         }
                     }
                 },
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Uri,
                     imeAction = ImeAction.Done
@@ -159,27 +146,39 @@ fun ServerBottomSheet(
                 )
             )
 
+            HorizontalDivider()
+
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.End)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 FilledTonalButton(
                     onClick = {
                         serverUrl = defaultServerUrl
                         showError = false
                         onReset()
-                        onDismiss()
-                    }
+                    },
+                    shapes = ButtonDefaults.shapes()
                 ) {
-                    Text(stringResource(R.string.action_reset_to_default))
+                    Text(
+                        text = stringResource(R.string.action_reset)
+                    )
                 }
 
-                Spacer(modifier = Modifier.weight(1f))
+                Spacer(
+                    modifier = Modifier.width(8.dp)
+                )
 
                 Button(
-                    onClick = { validateAndSave() }
+                    onClick = { validateAndSave() },
+                    shapes = ButtonDefaults.shapes()
                 ) {
-                    Text(stringResource(R.string.action_save))
+                    Text(
+                        text = stringResource(R.string.action_save)
+                    )
                 }
             }
         }

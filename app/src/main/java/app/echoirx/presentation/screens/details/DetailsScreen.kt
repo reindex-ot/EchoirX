@@ -78,12 +78,12 @@ fun DetailsScreen(
             ) {
                 TrackCover(
                     url = result.cover?.replace("80x80", "160x160"),
-                    size = 120.dp
+                    size = 72.dp
                 )
 
                 Column(
                     modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     Text(
                         text = result.title,
@@ -95,7 +95,6 @@ fun DetailsScreen(
                     Text(
                         text = result.artists.joinToString(", "),
                         style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -120,8 +119,8 @@ fun DetailsScreen(
                         }
                         Text(
                             text = result.duration,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.primary
                         )
                     }
                 }
