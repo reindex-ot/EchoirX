@@ -13,6 +13,7 @@ object SearchResultMapper {
             cover = cover,
             artists = artists,
             modes = modes,
-            formats = formats
+            formats = formats,
+            trackNumber = trackNumber
         )
 }

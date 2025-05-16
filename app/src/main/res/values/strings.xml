@@ -104,6 +104,7 @@
     <string name="title_clear_search_history">Clear Search History</string>
     <string name="title_save_cover_art">Save Cover Art</string>
     <string name="title_save_lyrics">Save Lyrics</string>
+    <string name="title_include_track_number">Include Track Number</string>
 
     <!-- Subtitles -->
     <string name="subtitle_region_filter">Availability: %s</string>

@@ -10,22 +10,31 @@ import app.echoirx.R
 
 enum class FileNamingFormat(
     @param:StringRes val displayNameResId: Int,
-    val format: (String, String) -> String,
+    val format: (String, String, Int?) -> String,
     val icon: ImageVector
 ) {
     ARTIST_TITLE(
         R.string.file_format_artist_title_display,
-        { artist, title -> "${artist.split(",").first().trim()} - $title" },
+        { artist, title, trackNumber ->
+            val prefix = trackNumber?.let { "$it. " } ?: ""
+            "$prefix${artist.split(",").first().trim()} - $title"
+        },
         Icons.Outlined.Person
     ),
     TITLE_ARTIST(
         R.string.file_format_title_artist_display,
-        { artist, title -> "$title - ${artist.split(",").first().trim()}" },
+        { artist, title, trackNumber ->
+            val prefix = trackNumber?.let { "$it. " } ?: ""
+            "$prefix$title - ${artist.split(",").first().trim()}"
+        },
         Icons.Outlined.MusicNote
     ),
     TITLE_ONLY(
         R.string.file_format_title_only_display,
-        { _, title -> title },
+        { _, title, trackNumber ->
+            val prefix = trackNumber?.let { "$it. " } ?: ""
+            "$prefix$title"
+        },
         Icons.Outlined.AudioFile
     );
 

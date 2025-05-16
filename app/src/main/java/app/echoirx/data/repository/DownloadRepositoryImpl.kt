@@ -343,9 +343,14 @@ class DownloadRepositoryImpl @Inject constructor(
 
     private suspend fun generateFileName(download: Download): String {
         val format = settingsRepository.getFileNamingFormat()
+        val includeTrackNumber = settingsRepository.getIncludeTrackNumber()
+
+        val trackNumber = if (includeTrackNumber) download.searchResult.trackNumber else null
+
         val fileName = format.format(
             download.searchResult.artists.joinToString(", "),
-            download.searchResult.title
+            download.searchResult.title,
+            trackNumber
         )
         return sanitizeFileName(fileName)
     }

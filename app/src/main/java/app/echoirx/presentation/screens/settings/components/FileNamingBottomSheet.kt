@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.FormatListNumbered
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -29,13 +31,16 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.echoirx.R
 import app.echoirx.domain.model.FileNamingFormat
+import app.echoirx.presentation.components.ThumbSwitch
 import app.echoirx.presentation.components.preferences.PreferencePosition
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FileNamingBottomSheet(
     selectedFormat: FileNamingFormat,
+    includeTrackNumber: Boolean,
     onSelectFormat: (FileNamingFormat) -> Unit,
+    onToggleTrackNumber: (Boolean) -> Unit,
     onDismiss: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -142,6 +147,38 @@ fun FileNamingBottomSheet(
                     )
                 }
             }
+
+            ListItem(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .clip(MaterialTheme.shapes.extraLarge),
+                colors = ListItemDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
+                ),
+                headlineContent = {
+                    Text(
+                        text = stringResource(R.string.title_include_track_number),
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.SemiBold,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
+                leadingContent = {
+                    Icon(
+                        imageVector = Icons.Outlined.FormatListNumbered,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                },
+                trailingContent = {
+                    ThumbSwitch(
+                        checked = includeTrackNumber,
+                        onCheckedChange = onToggleTrackNumber
+                    )
+                }
+            )
         }
     }
 }

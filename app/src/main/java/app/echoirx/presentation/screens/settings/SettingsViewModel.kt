@@ -38,6 +38,7 @@ class SettingsViewModel @Inject constructor(
             val serverUrl = settingsUseCase.getServerUrl()
             val saveCoverArt = settingsUseCase.getSaveCoverArt()
             val saveLyrics = settingsUseCase.getSaveLyrics()
+            val includeTrackNumber = settingsUseCase.getIncludeTrackNumber()
 
             _state.update {
                 it.copy(
@@ -46,7 +47,8 @@ class SettingsViewModel @Inject constructor(
                     region = region,
                     serverUrl = serverUrl,
                     saveCoverArt = saveCoverArt,
-                    saveLyrics = saveLyrics
+                    saveLyrics = saveLyrics,
+                    includeTrackNumber = includeTrackNumber
                 )
             }
         }
@@ -69,6 +71,17 @@ class SettingsViewModel @Inject constructor(
             _state.update {
                 it.copy(
                     fileNamingFormat = format
+                )
+            }
+        }
+    }
+
+    fun updateIncludeTrackNumber(enabled: Boolean) {
+        viewModelScope.launch {
+            settingsUseCase.setIncludeTrackNumber(enabled)
+            _state.update {
+                it.copy(
+                    includeTrackNumber = enabled
                 )
             }
         }
@@ -154,6 +167,7 @@ class SettingsViewModel @Inject constructor(
             settingsUseCase.resetServerSettings()
             settingsUseCase.setSaveCoverArt(false)
             settingsUseCase.setSaveLyrics(false)
+            settingsUseCase.setIncludeTrackNumber(false)
 
             _state.update {
                 it.copy(
@@ -162,7 +176,8 @@ class SettingsViewModel @Inject constructor(
                     region = "BR",
                     serverUrl = defaultServerUrl,
                     saveCoverArt = false,
-                    saveLyrics = false
+                    saveLyrics = false,
+                    includeTrackNumber = false
                 )
             }
         }

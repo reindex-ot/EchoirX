@@ -32,6 +32,10 @@ class SettingsUseCase @Inject constructor(
 
     suspend fun setSaveLyrics(enabled: Boolean) = repository.setSaveLyrics(enabled)
 
+    suspend fun getIncludeTrackNumber(): Boolean = repository.getIncludeTrackNumber()
+
+    suspend fun setIncludeTrackNumber(enabled: Boolean) = repository.setIncludeTrackNumber(enabled)
+
     suspend fun resetServerSettings() {
         repository.setServerUrl("https://example.com/api/echoir")
     }

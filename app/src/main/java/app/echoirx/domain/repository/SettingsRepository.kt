@@ -15,4 +15,6 @@ interface SettingsRepository {
     suspend fun setSaveCoverArt(enabled: Boolean)
     suspend fun getSaveLyrics(): Boolean
     suspend fun setSaveLyrics(enabled: Boolean)
+    suspend fun getIncludeTrackNumber(): Boolean
+    suspend fun setIncludeTrackNumber(enabled: Boolean)
 }

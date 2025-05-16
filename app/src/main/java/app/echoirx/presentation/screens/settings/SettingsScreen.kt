@@ -92,12 +92,17 @@ fun SettingsScreen(
     if (showFormatSheet) {
         FileNamingBottomSheet(
             selectedFormat = state.fileNamingFormat,
+            includeTrackNumber = state.includeTrackNumber,
             onSelectFormat = { format ->
                 viewModel.updateFileNamingFormat(format)
+            },
+            onToggleTrackNumber = { enabled ->
+                viewModel.updateIncludeTrackNumber(enabled)
             },
             onDismiss = { showFormatSheet = false }
         )
     }
+
 
     if (showResetSheet) {
         SettingsActionBottomSheet(

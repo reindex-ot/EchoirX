@@ -28,6 +28,7 @@ class SettingsRepositoryImpl @Inject constructor(
         val SERVER_URL = stringPreferencesKey("server_url")
         val SAVE_COVER_ART = booleanPreferencesKey("save_cover_art")
         val SAVE_LYRICS = booleanPreferencesKey("save_lyrics")
+        val INCLUDE_TRACK_NUMBER = booleanPreferencesKey("include_track_number")
     }
 
     // Default server URL - use this as the fallback value
@@ -95,6 +96,16 @@ class SettingsRepositoryImpl @Inject constructor(
     override suspend fun setSaveLyrics(enabled: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[PreferencesKeys.SAVE_LYRICS] = enabled
+        }
+    }
+
+    override suspend fun getIncludeTrackNumber(): Boolean {
+        return context.dataStore.data.first()[PreferencesKeys.INCLUDE_TRACK_NUMBER] ?: false
+    }
+
+    override suspend fun setIncludeTrackNumber(enabled: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[PreferencesKeys.INCLUDE_TRACK_NUMBER] = enabled
         }
     }
 }

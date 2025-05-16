@@ -11,5 +11,6 @@ data class SearchResultDto(
     val cover: String?,
     val artists: List<String>,
     val modes: List<String>?,
-    val formats: List<String>?
+    val formats: List<String>?,
+    val trackNumber: Int? = null
 )
