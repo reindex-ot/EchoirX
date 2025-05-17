@@ -82,5 +82,7 @@ Echoir utilizes a custom-built version of ffmpeg-kit specifically for Hi-Res Los
 
 ## Credits
 
-- **Design:** App launcher icon and banner by [Xelxen](https://github.com/Xelxen)
+- **Design:**
+  - App launcher icon and banner by [Xelxen](https://github.com/Xelxen)
+  - UI design improvements based on Figma mockups by [HotarunIchijou](https://github.com/HotarunIchijou)
 - **Core Technology:** [ffmpeg-kit](https://github.com/arthenica/ffmpeg-kit) by Arthenica (custom minimal build)
