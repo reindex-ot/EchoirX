@@ -9,14 +9,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.PlayArrow
-import androidx.compose.material.icons.outlined.Stop
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
@@ -70,30 +65,14 @@ fun TrackBottomSheet(
                     )
 
                     if (showPreviewButton) {
-                        FilledIconButton(
-                            onClick = onPreviewClick,
+                        PreviewButton(
+                            onPreviewClick = onPreviewClick,
+                            isPlaying = isPreviewPlaying,
                             modifier = Modifier
-                                .size(32.dp)
                                 .align(Alignment.BottomEnd)
-                                .offset(x = 8.dp, y = 8.dp),
-                            colors = IconButtonDefaults.filledIconButtonColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                            ),
-                            shape = MaterialTheme.shapes.medium
-                        ) {
-                            Icon(
-                                imageVector = if (isPreviewPlaying)
-                                    Icons.Outlined.Stop
-                                else
-                                    Icons.Outlined.PlayArrow,
-                                contentDescription = stringResource(
-                                    if (isPreviewPlaying) R.string.cd_stop_preview
-                                    else R.string.cd_play_preview
-                                ),
-                                modifier = Modifier.size(16.dp)
-                            )
-                        }
+                                .offset(x = 8.dp, y = 8.dp)
+                                .size(32.dp)
+                        )
                     }
                 }
 
