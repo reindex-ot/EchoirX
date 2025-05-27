@@ -4,19 +4,21 @@
 
 ## Overview
 
-Echoir (from Echo + Choir) is a sophisticated Material You music downloader for Android, delivering high-quality audio formats while adhering to Material Design principles. The name cleverly plays on the phrase "which will fall soon," reflecting the ephemeral nature of software projects.
+Echoir (from Echo + Choir) is a sophisticated Material You music downloader for Android, delivering
+high-quality audio formats while adhering to Material Design principles. The name cleverly plays on
+the phrase "which will fall soon," reflecting the ephemeral nature of software projects.
 
 ## Key Features
 
 ### Audio Quality Options
 
-| Quality Option | Technical Details |
-|----------------|-------------------|
-| **Hi-Res Lossless** | Up to 24-bit/192kHz FLAC |
-| **CD Quality Lossless** | 16-bit/44.1kHz FLAC |
-| **Dolby Atmos** | Enhanced AC-3/AC-4 |
-| **High Quality AAC** | 320kbps |
-| **Standard Quality** | 96kbps AAC |
+| Quality Option          | Technical Details        |
+|-------------------------|--------------------------|
+| **Hi-Res Lossless**     | Up to 24-bit/192kHz FLAC |
+| **CD Quality Lossless** | 16-bit/44.1kHz FLAC      |
+| **Dolby Atmos**         | Enhanced AC-3/AC-4       |
+| **High Quality AAC**    | 320kbps                  |
+| **Standard Quality**    | 96kbps AAC               |
 
 ### Design & User Experience
 
@@ -30,9 +32,9 @@ Echoir (from Echo + Choir) is a sophisticated Material You music downloader for 
 - **Comprehensive Metadata** — Extensive tag support for all major fields
 - **Queue Management** — Organize and prioritize downloads
 - **Customization Options**:
-  - Configurable download locations
-  - Flexible file naming formats
-  - Smart filtering system
+    - Configurable download locations
+    - Flexible file naming formats
+    - Smart filtering system
 
 ### Smart Filtering
 
@@ -43,12 +45,12 @@ Echoir (from Echo + Choir) is a sophisticated Material You music downloader for 
 
 Echoir embeds rich metadata in every download:
 
-| Category | Details |
-|----------|---------|
-| **Track Info** | Title, Track Number, Total Tracks, Disc Number, Total Discs |
-| **Album Info** | Album Title, Release Date, Year, Copyright, Record Label, UPC/Barcode |
-| **Artist Info** | Artist(s), Album Artist, Composer, Lyricist, Producer, Mixer, Engineer, Mastering Engineer |
-| **Additional** | Genre, Explicit Flag, ISRC, Cover Art (1280×1280), Synced Lyrics (when available), Source URL |
+| Category        | Details                                                                                       |
+|-----------------|-----------------------------------------------------------------------------------------------|
+| **Track Info**  | Title, Track Number, Total Tracks, Disc Number, Total Discs                                   |
+| **Album Info**  | Album Title, Release Date, Year, Copyright, Record Label, UPC/Barcode                         |
+| **Artist Info** | Artist(s), Album Artist, Composer, Lyricist, Producer, Mixer, Engineer, Mastering Engineer    |
+| **Additional**  | Genre, Explicit Flag, ISRC, Cover Art (1280×1280), Synced Lyrics (when available), Source URL |
 
 ## Technical Foundation
 
@@ -61,7 +63,8 @@ Echoir represents a complete reimagining of its predecessor (FluidAC) with signi
 
 ### Why FFmpeg?
 
-Echoir utilizes a custom-built version of ffmpeg-kit specifically for Hi-Res Lossless content processing:
+Echoir utilizes a custom-built version of ffmpeg-kit specifically for Hi-Res Lossless content
+processing:
 
 - **Handles MPEG-DASH Segments** — Hi-Res content is delivered as segmented files
 - **Stream Copy Only** — Uses `-c copy` flag for lossless concatenation without re-encoding
@@ -71,18 +74,21 @@ Echoir utilizes a custom-built version of ffmpeg-kit specifically for Hi-Res Los
 
 ### Enhance Your Experience
 
-- **Missing Lyrics?** Try [SongSync](https://github.com/Lambada10/SongSync/releases/latest) for managing and syncing lyrics
+- **Missing Lyrics?** Try [SongSync](https://github.com/Lambada10/SongSync/releases/latest) for
+  managing and syncing lyrics
 
 ### Recommended Music Players
 
-| App | Description | Links |
-|-----|-------------|-------|
-| **Gramophone** | Modern offline player with MD3 | [GitHub](https://github.com/AkaneTan/Gramophone) |
-| **AccordLegacy** | Apple Music style player | [Telegram](https://t.me/light_summer) |
+| App              | Description                    | Links                                            |
+|------------------|--------------------------------|--------------------------------------------------|
+| **Gramophone**   | Modern offline player with MD3 | [GitHub](https://github.com/AkaneTan/Gramophone) |
+| **AccordLegacy** | Apple Music style player       | [Telegram](https://t.me/light_summer)            |
 
 ## Credits
 
 - **Design:**
-  - App launcher icon and banner by [Xelxen](https://github.com/Xelxen)
-  - UI design improvements based on Figma mockups by [HotarunIchijou](https://github.com/HotarunIchijou)
-- **Core Technology:** [ffmpeg-kit](https://github.com/arthenica/ffmpeg-kit) by Arthenica (custom minimal build)
+    - App launcher icon and banner by [Xelxen](https://github.com/Xelxen)
+    - UI design improvements based on Figma mockups
+      by [HotarunIchijou](https://github.com/HotarunIchijou)
+- **Core Technology:** [ffmpeg-kit](https://github.com/arthenica/ffmpeg-kit) by Arthenica (custom
+  minimal build)
