@@ -34,7 +34,6 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             val dir = settingsUseCase.getOutputDirectory()
             val format = settingsUseCase.getFileNamingFormat()
-            val region = settingsUseCase.getRegion()
             val serverUrl = settingsUseCase.getServerUrl()
             val saveCoverArt = settingsUseCase.getSaveCoverArt()
             val saveLyrics = settingsUseCase.getSaveLyrics()
@@ -44,7 +43,6 @@ class SettingsViewModel @Inject constructor(
                 it.copy(
                     outputDirectory = dir,
                     fileNamingFormat = format,
-                    region = region,
                     serverUrl = serverUrl,
                     saveCoverArt = saveCoverArt,
                     saveLyrics = saveLyrics,
@@ -82,17 +80,6 @@ class SettingsViewModel @Inject constructor(
             _state.update {
                 it.copy(
                     includeTrackNumber = enabled
-                )
-            }
-        }
-    }
-
-    fun updateRegion(region: String) {
-        viewModelScope.launch {
-            settingsUseCase.setRegion(region)
-            _state.update {
-                it.copy(
-                    region = region
                 )
             }
         }
@@ -163,7 +150,6 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             settingsUseCase.setOutputDirectory(null)
             settingsUseCase.setFileNamingFormat(FileNamingFormat.TITLE_ONLY)
-            settingsUseCase.setRegion("BR")
             settingsUseCase.resetServerSettings()
             settingsUseCase.setSaveCoverArt(false)
             settingsUseCase.setSaveLyrics(false)
@@ -173,7 +159,6 @@ class SettingsViewModel @Inject constructor(
                 it.copy(
                     outputDirectory = null,
                     fileNamingFormat = FileNamingFormat.TITLE_ONLY,
-                    region = "BR",
                     serverUrl = defaultServerUrl,
                     saveCoverArt = false,
                     saveLyrics = false,

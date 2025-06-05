@@ -25,13 +25,11 @@ class ApiService @Inject constructor(
 
     suspend fun search(query: String, type: String): List<SearchResultDto> =
         withContext(Dispatchers.IO) {
-            val region = settingsRepository.getRegion()
             val baseUrl = getBaseUrl()
 
             client.get("$baseUrl/search") {
                 parameter("query", query)
                 parameter("type", type)
-                parameter("country", region)
             }.body()
         }
 

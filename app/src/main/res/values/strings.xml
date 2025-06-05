@@ -3,40 +3,6 @@
     <!-- App name -->
     <string name="app_name">EchoirX</string>
 
-    <!-- Country names array -->
-    <string-array name="region_country_names">
-        <item>Albania</item>
-        <item>Argentina</item>
-        <item>Australia</item>
-        <item>Austria</item>
-        <item>Belgium</item>
-        <item>Brazil (recommended)</item>
-        <item>Canada</item>
-        <item>Chile</item>
-        <item>Colombia</item>
-        <item>Dominican Republic</item>
-        <item>France</item>
-        <item>Germany</item>
-        <item>Hong Kong</item>
-        <item>Israel</item>
-        <item>Italy</item>
-        <item>Jamaica</item>
-        <item>Malaysia</item>
-        <item>Mexico</item>
-        <item>New Zealand</item>
-        <item>Nigeria</item>
-        <item>Peru</item>
-        <item>Puerto Rico</item>
-        <item>Singapore</item>
-        <item>South Africa</item>
-        <item>Spain</item>
-        <item>Thailand</item>
-        <item>Uganda</item>
-        <item>United Arab Emirates</item>
-        <item>United Kingdom</item>
-        <item>United States</item>
-    </string-array>
-
     <!-- Navigation -->
     <string name="nav_home">Home</string>
     <string name="nav_settings">Settings</string>
@@ -87,7 +53,6 @@
     <string name="title_active_downloads">Active downloads</string>
     <string name="title_download_history">Download history</string>
     <string name="title_file_naming_format">File naming format</string>
-    <string name="title_region_filter">Region Filter</string>
     <string name="title_storage">Storage</string>
     <string name="title_data">Data</string>
     <string name="title_about">About</string>
@@ -107,7 +72,6 @@
     <string name="title_include_track_number">Include Track Number</string>
 
     <!-- Subtitles -->
-    <string name="subtitle_region_filter">Availability: %s</string>
     <string name="subtitle_save_cover_art">Save album artwork as a separate file</string>
     <string name="subtitle_save_lyrics">Save track lyrics as a separate file</string>
 
@@ -130,8 +94,6 @@
     <string name="msg_file_open_failed">Could not open file</string>
     <string name="msg_server_subtitle">Configure custom server URL</string>
     <string name="msg_file_naming_desc">Choose how your downloaded files will be named</string>
-    <string name="msg_region_filter_desc">Choose a region to see tracks available in that market</string>
-    <string name="msg_region_info">This setting only affects what tracks appear in search results. Some tracks are only available in certain regions.</string>
     <string name="msg_server_recommendation">You\'re using the example server URL. Please configure a real server URL in the Settings tab to search for and download music.</string>
     <string name="msg_spaces_will_be_removed">Spaces will be automatically removed</string>
     <string name="msg_file_deleted">File deleted</string>

@@ -6,18 +6,14 @@ import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CloudQueue
 import androidx.compose.material.icons.outlined.Delete
-import androidx.compose.material.icons.outlined.FilterAlt
 import androidx.compose.material.icons.outlined.Folder
 import androidx.compose.material.icons.outlined.History
 import androidx.compose.material.icons.outlined.Image
@@ -25,16 +21,12 @@ import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Lyrics
 import androidx.compose.material.icons.outlined.RestartAlt
 import androidx.compose.material.icons.outlined.TextFormat
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
@@ -44,13 +36,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import app.echoirx.BuildConfig
 import app.echoirx.R
 import app.echoirx.data.utils.extensions.toDisplayPath
-import app.echoirx.domain.model.Region
 import app.echoirx.presentation.components.ThumbSwitch
 import app.echoirx.presentation.components.preferences.PreferenceCategory
 import app.echoirx.presentation.components.preferences.PreferenceItem
 import app.echoirx.presentation.components.preferences.PreferencePosition
 import app.echoirx.presentation.screens.settings.components.FileNamingBottomSheet
-import app.echoirx.presentation.screens.settings.components.RegionBottomSheet
 import app.echoirx.presentation.screens.settings.components.ServerBottomSheet
 import app.echoirx.presentation.screens.settings.components.SettingsActionBottomSheet
 
@@ -66,7 +56,6 @@ fun SettingsScreen(
     var showResetSheet by remember { mutableStateOf(false) }
     var showClearDataSheet by remember { mutableStateOf(false) }
     var showClearHistorySheet by remember { mutableStateOf(false) }
-    var showRegionSheet by remember { mutableStateOf(false) }
     var showServerSheet by remember { mutableStateOf(false) }
 
     val dirPicker = rememberLauncherForActivityResult(
@@ -143,16 +132,6 @@ fun SettingsScreen(
         )
     }
 
-    if (showRegionSheet) {
-        RegionBottomSheet(
-            selectedRegion = state.region,
-            onSelectRegion = { region ->
-                viewModel.updateRegion(region)
-            },
-            onDismiss = { showRegionSheet = false }
-        )
-    }
-
     if (showServerSheet) {
         ServerBottomSheet(
             currentServer = state.serverUrl,
@@ -183,41 +162,8 @@ fun SettingsScreen(
                 subtitle = stringResource(R.string.msg_server_subtitle),
                 icon = Icons.Outlined.CloudQueue,
                 onClick = { showServerSheet = true },
-                position = PreferencePosition.Top
+                position = PreferencePosition.Single
             )
-        }
-
-        item {
-            val regionName = Region.getDisplayName(Region.fromCode(state.region), context)
-            PreferenceItem(
-                title = stringResource(R.string.title_region_filter),
-                subtitle = stringResource(R.string.subtitle_region_filter, regionName),
-                icon = Icons.Outlined.FilterAlt,
-                onClick = { showRegionSheet = true },
-                position = PreferencePosition.Bottom
-            )
-        }
-
-        item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.Info,
-                    contentDescription = null,
-                    modifier = Modifier.size(16.dp),
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f)
-                )
-                Text(
-                    text = stringResource(R.string.msg_region_info),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
         }
 
         item {

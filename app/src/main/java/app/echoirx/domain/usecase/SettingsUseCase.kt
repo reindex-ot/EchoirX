@@ -16,10 +16,6 @@ class SettingsUseCase @Inject constructor(
     suspend fun setFileNamingFormat(format: FileNamingFormat) =
         repository.setFileNamingFormat(format)
 
-    suspend fun getRegion(): String = repository.getRegion()
-
-    suspend fun setRegion(region: String) = repository.setRegion(region)
-
     suspend fun getServerUrl(): String = repository.getServerUrl()
 
     suspend fun setServerUrl(url: String) = repository.setServerUrl(url)

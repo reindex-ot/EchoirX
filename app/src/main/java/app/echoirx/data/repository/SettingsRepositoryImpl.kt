@@ -24,7 +24,6 @@ class SettingsRepositoryImpl @Inject constructor(
     private object PreferencesKeys {
         val OUTPUT_DIRECTORY = stringPreferencesKey("output_directory")
         val FILE_NAMING_FORMAT = intPreferencesKey("file_naming_format")
-        val REGION = stringPreferencesKey("region")
         val SERVER_URL = stringPreferencesKey("server_url")
         val SAVE_COVER_ART = booleanPreferencesKey("save_cover_art")
         val SAVE_LYRICS = booleanPreferencesKey("save_lyrics")
@@ -56,16 +55,6 @@ class SettingsRepositoryImpl @Inject constructor(
     override suspend fun setFileNamingFormat(format: FileNamingFormat) {
         context.dataStore.edit { preferences ->
             preferences[PreferencesKeys.FILE_NAMING_FORMAT] = format.ordinal
-        }
-    }
-
-    override suspend fun getRegion(): String {
-        return context.dataStore.data.first()[PreferencesKeys.REGION] ?: "BR"
-    }
-
-    override suspend fun setRegion(region: String) {
-        context.dataStore.edit { preferences ->
-            preferences[PreferencesKeys.REGION] = region
         }
     }
 
