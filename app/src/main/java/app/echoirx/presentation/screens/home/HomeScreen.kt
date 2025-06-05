@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
@@ -80,7 +80,7 @@ fun HomeScreen(
                 modifier = Modifier.fillMaxSize()
             ) {
                 if (state.activeDownloads.isNotEmpty()) {
-                    item {
+                    item(key = "active_downloads_header") {
                         Text(
                             text = stringResource(R.string.title_active_downloads),
                             style = MaterialTheme.typography.titleMedium,
@@ -88,10 +88,10 @@ fun HomeScreen(
                         )
                     }
 
-                    items(
+                    itemsIndexed(
                         items = state.activeDownloads,
-                        key = { it.downloadId }
-                    ) { download ->
+                        key = { index, download -> "active_${download.downloadId}_$index" }
+                    ) { index, download ->
                         DownloadItem(
                             download = download
                             // Don't make active downloads clickable
@@ -100,7 +100,7 @@ fun HomeScreen(
                 }
 
                 if (state.downloadHistory.isNotEmpty()) {
-                    item {
+                    item(key = "download_history_header") {
                         Text(
                             text = stringResource(R.string.title_download_history),
                             style = MaterialTheme.typography.titleMedium,
@@ -113,10 +113,10 @@ fun HomeScreen(
                         )
                     }
 
-                    items(
+                    itemsIndexed(
                         items = state.downloadHistory,
-                        key = { it.downloadId }
-                    ) { download ->
+                        key = { index, download -> "history_${download.downloadId}_$index" }
+                    ) { index, download ->
                         DownloadItem(
                             download = download,
                             modifier = Modifier.clickable {

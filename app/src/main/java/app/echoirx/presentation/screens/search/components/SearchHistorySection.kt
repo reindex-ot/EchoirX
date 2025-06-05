@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -61,10 +61,10 @@ fun SearchHistorySection(
             }
 
             LazyColumn {
-                items(
+                itemsIndexed(
                     items = searchHistory,
-                    key = { "${it.query}_${it.type}_${it.timestamp}" }
-                ) { item ->
+                    key = { index, item -> "search_history_${item.id}_$index" }
+                ) { index, item ->
                     SearchHistoryItem(
                         item = item,
                         onClick = { onHistoryItemClick(item) },
@@ -94,10 +94,10 @@ fun SearchSuggestionsSection(
         )
 
         LazyColumn {
-            items(
+            itemsIndexed(
                 items = suggestions,
-                key = { "${it.query}_${it.type}_${it.timestamp}" }
-            ) { item ->
+                key = { index, item -> "suggestion_${item.id}_$index" }
+            ) { index, item ->
                 SearchSuggestionItem(
                     item = item,
                     onClick = { onSuggestionClick(item) }

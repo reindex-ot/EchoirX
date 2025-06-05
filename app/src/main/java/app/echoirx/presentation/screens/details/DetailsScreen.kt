@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ContainedLoadingIndicator
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.HorizontalDivider
@@ -169,10 +169,10 @@ fun DetailsScreen(
                     LazyColumn(
                         modifier = Modifier.fillMaxSize()
                     ) {
-                        items(
+                        itemsIndexed(
                             items = state.tracks,
-                            key = { it.id }
-                        ) { track ->
+                            key = { index, track -> "album_track_${track.id}_$index" }
+                        ) { index, track ->
                             ListItem(
                                 headlineContent = {
                                     Text(
@@ -196,7 +196,7 @@ fun DetailsScreen(
                                         text = String.format(
                                             java.util.Locale.forLanguageTag(Locale.current.language),
                                             "%02d",
-                                            state.tracks.indexOfFirst { it.id == track.id } + 1
+                                            index + 1
                                         ),
                                         style = MaterialTheme.typography.bodyMedium,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant

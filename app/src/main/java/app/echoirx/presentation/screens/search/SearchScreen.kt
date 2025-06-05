@@ -11,7 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -274,7 +274,10 @@ fun SearchScreen(
                         LazyColumn(
                             state = lazyListState
                         ) {
-                            items(state.filteredResults) { result ->
+                            itemsIndexed(
+                                items = state.filteredResults,
+                                key = { index, result -> "search_result_${result.id}_$index" }
+                            ) { index, result ->
                                 SearchResultItem(
                                     result = result,
                                     onClick = {
@@ -367,7 +370,6 @@ fun SearchScreen(
             }
         )
     }
-
 
     if (showFilterBottomSheet) {
         FilterBottomSheet(
