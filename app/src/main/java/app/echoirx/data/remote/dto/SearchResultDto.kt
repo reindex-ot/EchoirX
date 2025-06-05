@@ -1,5 +1,6 @@
 package app.echoirx.data.remote.dto
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -12,5 +13,5 @@ data class SearchResultDto(
     val artists: List<String>,
     val modes: List<String>?,
     val formats: List<String>?,
-    val trackNumber: Int? = null
+    @SerialName("track_number") val trackNumber: Int? = null
 )
