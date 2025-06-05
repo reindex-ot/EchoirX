@@ -194,7 +194,7 @@ fun DetailsScreen(
                                 leadingContent = {
                                     Text(
                                         text = String.format(
-                                            java.util.Locale.forLanguageTag(Locale.current.language),
+                                            java.util.Locale.getDefault(),
                                             "%02d",
                                             index + 1
                                         ),

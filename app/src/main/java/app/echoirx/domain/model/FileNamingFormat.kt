@@ -16,7 +16,9 @@ enum class FileNamingFormat(
     ARTIST_TITLE(
         R.string.file_format_artist_title_display,
         { artist, title, trackNumber ->
-            val prefix = trackNumber?.let { "$it. " } ?: ""
+            val prefix =
+                trackNumber?.let { String.format(java.util.Locale.getDefault(), "%02d. ", it) }
+                    ?: ""
             "$prefix${artist.split(",").first().trim()} - $title"
         },
         Icons.Outlined.Person
@@ -24,7 +26,9 @@ enum class FileNamingFormat(
     TITLE_ARTIST(
         R.string.file_format_title_artist_display,
         { artist, title, trackNumber ->
-            val prefix = trackNumber?.let { "$it. " } ?: ""
+            val prefix =
+                trackNumber?.let { String.format(java.util.Locale.getDefault(), "%02d. ", it) }
+                    ?: ""
             "$prefix$title - ${artist.split(",").first().trim()}"
         },
         Icons.Outlined.MusicNote
@@ -32,7 +36,9 @@ enum class FileNamingFormat(
     TITLE_ONLY(
         R.string.file_format_title_only_display,
         { _, title, trackNumber ->
-            val prefix = trackNumber?.let { "$it. " } ?: ""
+            val prefix =
+                trackNumber?.let { String.format(java.util.Locale.getDefault(), "%02d. ", it) }
+                    ?: ""
             "$prefix$title"
         },
         Icons.Outlined.AudioFile
