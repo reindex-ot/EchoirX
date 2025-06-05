@@ -15,6 +15,9 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import okhttp3.Dns
+import okhttp3.OkHttpClient
+import java.net.InetAddress
 import java.time.Duration
 import javax.inject.Singleton
 
@@ -22,9 +25,33 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+    class CloudflareDns : Dns {
+        override fun lookup(hostname: String): List<InetAddress> {
+            return try {
+                InetAddress.getAllByName(hostname).toList()
+            } catch (_: Exception) {
+                Dns.SYSTEM.lookup(hostname)
+            }
+        }
+    }
+
     @Provides
     @Singleton
-    fun provideKtorClient(): HttpClient = HttpClient(OkHttp) {
+    fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
+        .dns(CloudflareDns())
+        .connectTimeout(Duration.ofSeconds(20))
+        .readTimeout(Duration.ofMinutes(1))
+        .writeTimeout(Duration.ofMinutes(1))
+        .retryOnConnectionFailure(true)
+        .build()
+
+    @Provides
+    @Singleton
+    fun provideKtorClient(okHttpClient: OkHttpClient): HttpClient = HttpClient(OkHttp) {
+        engine {
+            preconfigured = okHttpClient
+        }
+
         install(HttpTimeout) {
             requestTimeoutMillis = Duration.ofMinutes(2).toMillis()
             connectTimeoutMillis = Duration.ofSeconds(20).toMillis()
@@ -45,15 +72,6 @@ object NetworkModule {
 
         defaultRequest {
             headers.append("X-App-Version", BuildConfig.VERSION_NAME)
-        }
-
-        engine {
-            config {
-                retryOnConnectionFailure(true)
-                connectTimeout(Duration.ofSeconds(20))
-                readTimeout(Duration.ofMinutes(1))
-                writeTimeout(Duration.ofMinutes(1))
-            }
         }
     }
 
