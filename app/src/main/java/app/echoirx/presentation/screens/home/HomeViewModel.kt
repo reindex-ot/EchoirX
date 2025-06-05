@@ -12,7 +12,6 @@ import app.echoirx.domain.model.DownloadRequest
 import app.echoirx.domain.model.DownloadStatus
 import app.echoirx.domain.model.QualityConfig
 import app.echoirx.domain.repository.DownloadRepository
-import app.echoirx.domain.usecase.GetDownloadsUseCase
 import app.echoirx.domain.usecase.ProcessDownloadUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -28,7 +27,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getDownloadsUseCase: GetDownloadsUseCase,
     private val downloadRepository: DownloadRepository,
     private val processDownloadUseCase: ProcessDownloadUseCase,
     @param:ApplicationContext private val context: Context
@@ -38,8 +36,8 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            getDownloadsUseCase.getActiveDownloads()
-                .combine(getDownloadsUseCase.getDownloadHistory()) { active, history ->
+            downloadRepository.getActiveDownloads()
+                .combine(downloadRepository.getDownloadHistory()) { active, history ->
                     HomeState(
                         activeDownloads = active,
                         downloadHistory = history,

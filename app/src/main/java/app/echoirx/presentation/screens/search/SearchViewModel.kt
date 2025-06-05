@@ -10,8 +10,8 @@ import app.echoirx.domain.model.DownloadRequest
 import app.echoirx.domain.model.QualityConfig
 import app.echoirx.domain.model.SearchHistoryItem
 import app.echoirx.domain.model.SearchResult
+import app.echoirx.domain.repository.SearchHistoryRepository
 import app.echoirx.domain.usecase.ProcessDownloadUseCase
-import app.echoirx.domain.usecase.SearchHistoryUseCase
 import app.echoirx.domain.usecase.SearchUseCase
 import app.echoirx.domain.usecase.SettingsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,7 +29,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val searchUseCase: SearchUseCase,
-    private val searchHistoryUseCase: SearchHistoryUseCase,
+    private val searchHistoryRepository: SearchHistoryRepository,
     private val processDownloadUseCase: ProcessDownloadUseCase,
     private val settingsUseCase: SettingsUseCase,
     private val audioPreviewPlayer: AudioPreviewPlayer,
@@ -47,7 +47,7 @@ class SearchViewModel @Inject constructor(
 
     private fun loadSearchHistory() {
         viewModelScope.launch {
-            searchHistoryUseCase.getRecentSearches().collect { history ->
+            searchHistoryRepository.getRecentSearches().collect { history ->
                 _state.update { it.copy(searchHistory = history) }
             }
         }
@@ -70,7 +70,7 @@ class SearchViewModel @Inject constructor(
     }
 
     private suspend fun updateSuggestions(query: String) {
-        val suggestions = searchHistoryUseCase.searchHistory(query)
+        val suggestions = searchHistoryRepository.searchHistory(query)
         _state.update { it.copy(suggestedQueries = suggestions) }
     }
 
@@ -175,7 +175,10 @@ class SearchViewModel @Inject constructor(
                     SearchType.ALBUMS -> searchUseCase.searchAlbums(query)
                 }
 
-                searchHistoryUseCase.addSearch(query, currentState.searchType)
+                // Add to search history with validation
+                if (query.isNotBlank()) {
+                    searchHistoryRepository.addSearch(query.trim(), currentState.searchType.name)
+                }
 
                 _state.update {
                     it.copy(
@@ -262,13 +265,13 @@ class SearchViewModel @Inject constructor(
 
     fun deleteHistoryItem(item: SearchHistoryItem) {
         viewModelScope.launch {
-            searchHistoryUseCase.deleteSearch(item)
+            searchHistoryRepository.deleteSearch(item.id)
         }
     }
 
     fun clearSearchHistory() {
         viewModelScope.launch {
-            searchHistoryUseCase.clearHistory()
+            searchHistoryRepository.clearHistory()
         }
     }
 
