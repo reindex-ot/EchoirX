@@ -14,6 +14,7 @@ import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import okhttp3.Dns
 import okhttp3.OkHttpClient
@@ -37,13 +38,19 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
-        .dns(CloudflareDns())
-        .connectTimeout(Duration.ofSeconds(20))
-        .readTimeout(Duration.ofMinutes(1))
-        .writeTimeout(Duration.ofMinutes(1))
-        .retryOnConnectionFailure(true)
-        .build()
+    fun provideOkHttpClient(
+        settingsRepository: SettingsRepository
+    ): OkHttpClient {
+        val useCloudflare = runBlocking { settingsRepository.getUseCloudflareEns() }
+
+        return OkHttpClient.Builder()
+            .dns(if (useCloudflare) CloudflareDns() else Dns.SYSTEM)
+            .connectTimeout(Duration.ofSeconds(20))
+            .readTimeout(Duration.ofMinutes(1))
+            .writeTimeout(Duration.ofMinutes(1))
+            .retryOnConnectionFailure(true)
+            .build()
+    }
 
     @Provides
     @Singleton

@@ -8,5 +8,6 @@ data class SettingsState(
     val serverUrl: String = "https://example.com/api/echoir",
     val saveCoverArt: Boolean = false,
     val saveLyrics: Boolean = false,
-    val includeTrackNumber: Boolean = false
+    val includeTrackNumber: Boolean = false,
+    val useCloudflareEns: Boolean = false
 )

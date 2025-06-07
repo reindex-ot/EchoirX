@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CloudQueue
 import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material.icons.outlined.Dns
 import androidx.compose.material.icons.outlined.Folder
 import androidx.compose.material.icons.outlined.History
 import androidx.compose.material.icons.outlined.Image
@@ -92,7 +93,6 @@ fun SettingsScreen(
         )
     }
 
-
     if (showResetSheet) {
         SettingsActionBottomSheet(
             title = stringResource(R.string.dialog_reset_settings_title),
@@ -162,7 +162,22 @@ fun SettingsScreen(
                 subtitle = stringResource(R.string.msg_server_subtitle),
                 icon = Icons.Outlined.CloudQueue,
                 onClick = { showServerSheet = true },
-                position = PreferencePosition.Single
+                position = PreferencePosition.Top
+            )
+        }
+
+        item {
+            PreferenceItem(
+                title = stringResource(R.string.title_use_cloudflare_dns),
+                subtitle = stringResource(R.string.subtitle_use_cloudflare_dns),
+                icon = Icons.Outlined.Dns,
+                position = PreferencePosition.Bottom,
+                trailingContent = {
+                    ThumbSwitch(
+                        checked = state.useCloudflareEns,
+                        onCheckedChange = { viewModel.updateUseCloudflareEns(it) }
+                    )
+                }
             )
         }
 

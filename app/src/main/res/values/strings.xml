@@ -70,10 +70,12 @@
     <string name="title_save_cover_art">Save Cover Art</string>
     <string name="title_save_lyrics">Save Lyrics</string>
     <string name="title_include_track_number">Include Track Number</string>
+    <string name="title_use_cloudflare_dns">Use Cloudflare DNS</string>
 
     <!-- Subtitles -->
     <string name="subtitle_save_cover_art">Save album artwork as a separate file</string>
     <string name="subtitle_save_lyrics">Save track lyrics as a separate file</string>
+    <string name="subtitle_use_cloudflare_dns">Enable if you have connection issues or can\'t access servers</string>
 
     <!-- Messages -->
     <string name="msg_downloads_empty">No downloads yet</string>

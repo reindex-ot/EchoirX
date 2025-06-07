@@ -32,6 +32,10 @@ class SettingsUseCase @Inject constructor(
 
     suspend fun setIncludeTrackNumber(enabled: Boolean) = repository.setIncludeTrackNumber(enabled)
 
+    suspend fun getUseCloudflareEns(): Boolean = repository.getUseCloudflareEns()
+
+    suspend fun setUseCloudflareEns(enabled: Boolean) = repository.setUseCloudflareEns(enabled)
+
     suspend fun resetServerSettings() {
         repository.setServerUrl("https://example.com/api/echoir")
     }

@@ -38,6 +38,7 @@ class SettingsViewModel @Inject constructor(
             val saveCoverArt = settingsUseCase.getSaveCoverArt()
             val saveLyrics = settingsUseCase.getSaveLyrics()
             val includeTrackNumber = settingsUseCase.getIncludeTrackNumber()
+            val useCloudflareEns = settingsUseCase.getUseCloudflareEns()
 
             _state.update {
                 it.copy(
@@ -46,7 +47,8 @@ class SettingsViewModel @Inject constructor(
                     serverUrl = serverUrl,
                     saveCoverArt = saveCoverArt,
                     saveLyrics = saveLyrics,
-                    includeTrackNumber = includeTrackNumber
+                    includeTrackNumber = includeTrackNumber,
+                    useCloudflareEns = useCloudflareEns
                 )
             }
         }
@@ -120,6 +122,17 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
+    fun updateUseCloudflareEns(enabled: Boolean) {
+        viewModelScope.launch {
+            settingsUseCase.setUseCloudflareEns(enabled)
+            _state.update {
+                it.copy(
+                    useCloudflareEns = enabled
+                )
+            }
+        }
+    }
+
     fun resetServerSettings() {
         viewModelScope.launch {
             settingsUseCase.resetServerSettings()
@@ -154,6 +167,7 @@ class SettingsViewModel @Inject constructor(
             settingsUseCase.setSaveCoverArt(false)
             settingsUseCase.setSaveLyrics(false)
             settingsUseCase.setIncludeTrackNumber(false)
+            settingsUseCase.setUseCloudflareEns(false)
 
             _state.update {
                 it.copy(
@@ -162,7 +176,8 @@ class SettingsViewModel @Inject constructor(
                     serverUrl = defaultServerUrl,
                     saveCoverArt = false,
                     saveLyrics = false,
-                    includeTrackNumber = false
+                    includeTrackNumber = false,
+                    useCloudflareEns = false
                 )
             }
         }

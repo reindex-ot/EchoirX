@@ -28,6 +28,7 @@ class SettingsRepositoryImpl @Inject constructor(
         val SAVE_COVER_ART = booleanPreferencesKey("save_cover_art")
         val SAVE_LYRICS = booleanPreferencesKey("save_lyrics")
         val INCLUDE_TRACK_NUMBER = booleanPreferencesKey("include_track_number")
+        val USE_CLOUDFLARE_DNS = booleanPreferencesKey("use_cloudflare_dns")
     }
 
     // Default server URL - use this as the fallback value
@@ -95,6 +96,16 @@ class SettingsRepositoryImpl @Inject constructor(
     override suspend fun setIncludeTrackNumber(enabled: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[PreferencesKeys.INCLUDE_TRACK_NUMBER] = enabled
+        }
+    }
+
+    override suspend fun getUseCloudflareEns(): Boolean {
+        return context.dataStore.data.first()[PreferencesKeys.USE_CLOUDFLARE_DNS] ?: false
+    }
+
+    override suspend fun setUseCloudflareEns(enabled: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[PreferencesKeys.USE_CLOUDFLARE_DNS] = enabled
         }
     }
 }
