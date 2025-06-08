@@ -81,7 +81,7 @@
   <string name="msg_search_no_results_filters">一致する結果はありません</string>
   <string name="msg_search_no_results_filters_desc">フィルターの設定を変更してみてください</string>
   <string name="msg_unknown_error">不明なエラーが発生しました</string>
-  <string name="msg_download_started">%1$s の音質でダウンロードを開始しました</string>
+  <string name="msg_download_started">%1$sの音質でダウンロードを開始しました</string>
   <string name="msg_clear_data_subtitle">ダウンロード履歴とキャッシュを消去</string>
   <string name="msg_reset_settings_subtitle">すべての設定をデフォルトにリセット</string>
   <string name="msg_about_version">バージョン %s</string>
@@ -103,8 +103,8 @@
   <!-- Notifications -->
   <string name="notification_channel_name">ダウンロード</string>
   <string name="notification_channel_desc">トラックのダウンロード通知</string>
-  <string name="notification_downloading">%1$s をダウンロード中</string>
-  <string name="notification_processing">%1$s を処理中</string>
+  <string name="notification_downloading">%1$sをダウンロード中</string>
+  <string name="notification_processing">%1$sを処理中</string>
   <string name="notification_complete">ダウンロード完了</string>
   <string name="notification_failed">ダウンロード失敗</string>
   <string name="notification_progress">ダウンロード中</string>
@@ -147,14 +147,14 @@
   <string name="quality_desc_lossless">CD 音質の 16-bit/44.1kHz の FLAC 形式</string>
   <string name="quality_desc_dolby_ac3">Dolby Atmos 空間オーディオを備えた E-AC-3 形式</string>
   <string name="quality_desc_dolby_ac4">Dolby Atmos 空間オーディオ対応の AC-4 形式 (推奨)</string>
-  <string name="quality_desc_aac_320">320 KB/s の最高音質の非可逆圧縮</string>
-  <string name="quality_desc_aac_96">96 KB/s の標準音質の非可逆圧縮</string>
+  <string name="quality_desc_aac_320">320 KB/s の最高音質な非可逆圧縮</string>
+  <string name="quality_desc_aac_96">96 KB/s の標準音質な非可逆圧縮</string>
   <!-- File Naming Format -->
   <string name="file_format_artist_title_display">アーティスト - タイトル</string>
   <string name="file_format_title_artist_display">タイトル - アーティスト</string>
   <string name="file_format_title_only_display">タイトル</string>
   <!-- Hints -->
-  <string name="hint_search">%1$s を検索…</string>
+  <string name="hint_search">%1$sを検索…</string>
   <string name="hint_server_url">https://example.com/api/echoir</string>
   <!-- Tooltips -->
   <string name="tooltip_filter">検索結果をフィルタリング</string>
