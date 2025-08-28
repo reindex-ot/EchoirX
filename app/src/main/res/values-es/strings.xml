@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name -->
+    <string name="app_name">EchoirX</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Inicio</string>
+    <string name="nav_settings">Ajustes</string>
+    <string name="nav_search">Buscar</string>
+    <string name="nav_details">Detalles</string>
+
+    <!-- Content Descriptions -->
+    <string name="cd_back_button">Volver atrás</string>
+    <string name="cd_error">Error</string>
+    <string name="cd_search">Buscar</string>
+    <string name="cd_clear_search">Limpiar búsqueda</string>
+    <string name="cd_filter_button">Filtrar resultados</string>
+    <string name="cd_download_button">Opciones de descarga</string>
+    <string name="cd_download_option">Opción de descarga: %s</string>
+    <string name="cd_explicit_content">Contenido explícito</string>
+    <string name="cd_dolby_atmos">Compatible con Dolby Atmos</string>
+    <string name="cd_track_image">Imagen de la pista</string>
+    <string name="cd_filter_quality">Opciones de filtro de calidad</string>
+    <string name="cd_filter_content">Opciones de filtro de contenido</string>
+    <string name="cd_play">Reproducir</string>
+    <string name="cd_delete">Eliminar</string>
+    <string name="cd_share">Compartir</string>
+    <string name="cd_history">Historial</string>
+    <string name="cd_play_preview">Reproducir vista previa</string>
+    <string name="cd_stop_preview">Detener vista previa</string>
+    <string name="cd_retry">Reintentar</string>
+    <string name="cd_delete_search">Eliminar búsqueda</string>
+    <string name="cd_clear">Limpiar</string>
+
+    <!-- Labels -->
+    <string name="label_explicit">Explícito</string>
+    <string name="label_dolby_atmos">Dolby Atmos</string>
+    <string name="label_dolby">Dolby</string>
+    <string name="label_aac">AAC</string>
+    <string name="label_tracks">Pistas</string>
+    <string name="label_albums">Albums</string>
+    <string name="label_clean">Limpio</string>
+    <string name="label_unknown">Desconocido</string>
+    <string name="label_queued">En cola</string>
+    <string name="label_server_url">URL del servidor</string>
+    <string name="label_processing">Procesando</string>
+    <string name="label_completed">Completado</string>
+    <string name="label_failed">Fallido</string>
+    <string name="label_file_missing">Archivo faltante</string>
+    <string name="label_deleted">Eliminado</string>
+
+    <!-- Titles -->
+    <string name="title_active_downloads">Descargas activas</string>
+    <string name="title_download_history">Historial de descargas</string>
+    <string name="title_file_naming_format">Formato de nombre de archivo</string>
+    <string name="title_storage">Almacenamiento</string>
+    <string name="title_data">Datos</string>
+    <string name="title_about">Acerca de</string>
+    <string name="title_quality">Calidad</string>
+    <string name="title_content">Contenido</string>
+    <string name="title_download_location">Ubicación de descarga</string>
+    <string name="title_server">Servidor</string>
+    <string name="title_server_recommendation">Configuración del servidor requerida</string>
+    <string name="title_clear_data">Limpiar datos</string>
+    <string name="title_reset_settings">Restablecer ajustes</string>
+    <string name="title_filter_options">Opciones de filtro</string>
+    <string name="title_recent_searches">Búsquedas recientes</string>
+    <string name="title_suggestions">Sugerencias</string>
+    <string name="title_clear_search_history">Limpiar historial de búsquedas</string>
+    <string name="title_save_cover_art">Guardar arte de portada</string>
+    <string name="title_save_lyrics">Guardar letras de pista como archivo separado</string>
+    <string name="title_include_track_number">Incluir número de pista</string>
+    <string name="title_use_cloudflare_dns">Usar DNS de Cloudflare</string>
+
+    <!-- Subtitles -->
+    <string name="subtitle_save_cover_art">Guardar arte de álbum como archivo separado</string>
+    <string name="subtitle_save_lyrics">Guardar letras de pista como archivo separado</string>
+    <string name="subtitle_use_cloudflare_dns">Habilitar si tienes problemas de conexión o no puedes acceder a los servidores</string>
+
+    <!-- Messages -->
+    <string name="msg_downloads_empty">Aún no hay descargas</string>
+    <string name="msg_downloads_empty_desc">Tus pistas descargadas aparecerán aquí</string>
+    <string name="msg_search_empty">Buscar música</string>
+    <string name="msg_search_empty_desc">Ingresa un artista, álbum o nombre de pista para comenzar a buscar</string>
+    <string name="msg_search_no_results">No se encontraron resultados</string>
+    <string name="msg_search_no_results_desc">Intenta buscar con diferentes palabras clave</string>
+    <string name="msg_search_no_results_filters">No hay resultados coincidentes</string>
+    <string name="msg_search_no_results_filters_desc">Intenta ajustar tus configuraciones de filtro</string>
+    <string name="msg_unknown_error">Ocurrió un error desconocido</string>
+    <string name="msg_download_started">Comenzó la descarga en calidad %1$s</string>
+    <string name="msg_clear_data_subtitle">Limpiar historial de descargas y caché</string>
+    <string name="msg_reset_settings_subtitle">Restablecer todos los ajustes a predeterminados</string>
+    <string name="msg_about_version">Versión %s</string>
+    <string name="msg_file_not_found">Archivo no encontrado</string>
+    <string name="msg_no_player_available">No hay reproductor de música disponible</string>
+    <string name="msg_file_open_failed">No se pudo abrir el archivo</string>
+    <string name="msg_server_subtitle">Configurar URL de servidor personalizado</string>
+    <string name="msg_file_naming_desc">Elige cómo se nombrarán tus archivos descargados</string>
+    <string name="msg_server_recommendation">Estás usando la URL de servidor de ejemplo. Por favor, configura una URL de servidor real en la pestaña de Ajustes para buscar y descargar música.</string>
+    <string name="msg_spaces_will_be_removed">Los espacios se eliminarán automáticamente</string>
+    <string name="msg_file_deleted">Archivo eliminado</string>
+    <string name="msg_removed_from_history">Eliminado del historial de descargas</string>
+    <string name="msg_preview_error">No se pudo reproducir la vista previa</string>
+    <string name="msg_download_restarted">Descarga reiniciada</string>
+    <string name="msg_download_retry_failed">Fallo al reiniciar la descarga</string>
+    <string name="msg_no_search_history">Sin historial de búsquedas</string>
+    <string name="msg_no_search_history_desc">Tus búsquedas recientes aparecerán aquí</string>
+    <string name="msg_clear_search_history_subtitle">Eliminar todas tus búsquedas guardadas</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_name">Descargas</string>
+    <string name="notification_channel_desc">Notificaciones de descarga de pistas</string>
+    <string name="notification_downloading">Descargando %1$s</string>
+    <string name="notification_processing">Procesando %1$s</string>
+    <string name="notification_complete">Descarga completada</string>
+    <string name="notification_failed">Descarga fallida</string>
+    <string name="notification_progress">Descargas en progreso</string>
+
+    <!-- Dialogs -->
+    <string name="dialog_reset_settings_title">¿Restablecer ajustes?</string>
+    <string name="dialog_reset_settings_message">¿Estás seguro de que quieres restablecer todos los ajustes a predeterminados? Esto no se puede deshacer.</string>
+    <string name="dialog_clear_data_title">¿Limpiar datos?</string>
+    <string name="dialog_clear_data_message">Estás seguro de que quieres limpiar el historial de descargas y el caché? Esto no se puede deshacer.</string>
+    <string name="dialog_clear_history_title">¿Limpiar historial de búsquedas?</string>
+    <string name="dialog_clear_history_message">¿Estás seguro de que quieres limpiar tu historial de búsquedas? Esto no se puede deshacer.</string>
+
+    <!-- Actions -->
+    <string name="action_clear_search">Limpiar</string>
+    <string name="action_retry">Reintentar</string>
+    <string name="action_done">Hecho</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_reset">Restablecer</string>
+    <string name="action_clear">Limpiar</string>
+    <string name="action_clear_all">Limpiar todo</string>
+    <string name="action_save">Guardar</string>
+    <string name="action_reset_to_default">Restablecer a predeterminado</string>
+    <string name="action_open_settings">Ir a ajustes</string>
+    <string name="action_open_in_player">Abrir en reproductor</string>
+    <string name="action_delete_file">Eliminar archivo</string>
+    <string name="action_delete_from_history">Eliminar del historial</string>
+    <string name="action_share">Compartir</string>
+    <string name="action_play_preview">Reproducir vista previa</string>
+    <string name="action_stop_preview">Detener vista previa</string>
+    <string name="action_retry_download">Reintentar descarga</string>
+    <string name="action_download_with_quality">Descargar (%1$s)</string>
+
+    <!-- Quality Labels -->
+    <string name="quality_label_hires">Hi-Res</string>
+    <string name="quality_label_lossless">Lossless</string>
+    <string name="quality_label_cdq">CDQ</string>
+    <string name="quality_label_dolby_ac3">Dolby EAC3</string>
+    <string name="quality_label_dolby_ac4">Dolby AC4</string>
+    <string name="quality_label_aac_320">AAC 320</string>
+    <string name="quality_label_aac_96">AAC 96</string>
+
+    <!-- Quality Descriptions -->
+    <string name="quality_desc_hires">Formato FLAC de 24-bit/192kHz con máxima calidad de audio</string>
+    <string name="quality_desc_lossless">Formato FLAC de 16-bit/44.1kHz con calidad CD</string>
+    <string name="quality_desc_dolby_ac3">Formato E-AC-3 con audio espacial Dolby Atmos</string>
+    <string name="quality_desc_dolby_ac4">Formato AC-4 con audio espacial Dolby Atmos (recomendado)</string>
+    <string name="quality_desc_aac_320">Compresión con pérdidas de alta calidad a 320 KB/s</string>
+    <string name="quality_desc_aac_96">Compresión con pérdidas de calidad estándar a 96 KB/s</string>
+
+    <!-- File Naming Format -->
+    <string name="file_format_artist_title_display">Artista - Título</string>
+    <string name="file_format_title_artist_display">Artista - Título</string>
+    <string name="file_format_title_only_display">Título</string>
+
+    <!-- Hints -->
+    <string name="hint_search">Buscar %1$s…</string>
+    <string name="hint_server_url">https://example.com/api/echoir</string>
+
+    <!-- Tooltips -->
+    <string name="tooltip_filter">Filtrar resultados de búsqueda</string>
+
+    <!-- Errors -->
+    <string name="error_empty_server_url">La URL del servidor no puede estar vacía</string>
+    <string name="error_example_server">No se puede conectar al servidor de ejemplo. Por favor, configura una URL de servidor real en Ajustes.</string>
+
+</resources>
